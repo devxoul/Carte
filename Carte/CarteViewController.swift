@@ -26,6 +26,8 @@ import UIKit
 public class CarteViewController: UITableViewController {
 
     public var items = [CarteItem]()
+    public var configureDetailViewController: ((CarteDetailViewController) -> Void)?
+
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -93,6 +95,7 @@ extension CarteViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let detailViewController = CarteDetailViewController()
         detailViewController.carteItem = self.items[indexPath.row]
+        self.configureDetailViewController?(detailViewController)
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 
