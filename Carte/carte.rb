@@ -27,8 +27,11 @@ class Generator
     files = []
     filenames = `find .. -name "LICENSE*"`.split("\n")
     filenames.each do |filename|
-      name = filename.split("/Pods/")[1].split("/")[0]
-      self.cartes[name] = Base64.encode64(File.read(filename))
+      begin
+        name = filename.split("/Pods/")[1].split("/")[0]
+        self.cartes[name] = Base64.strict_encode64(File.read(filename))
+      rescue
+      end
     end
   end
 
