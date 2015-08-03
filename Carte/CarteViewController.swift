@@ -68,13 +68,7 @@ extension CarteViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as? UITableViewCell
             ?? UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         let item = self.items[indexPath.row]
-        if let name = item.name {
-            if let version = item.version {
-                cell.textLabel?.text = "\(name) (\(version))"
-            } else {
-                cell.textLabel?.text = name
-            }
-        }
+        cell.textLabel?.text = item.displayName
         cell.detailTextLabel?.text = item.licenseName
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
@@ -82,6 +76,39 @@ extension CarteViewController {
 
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        let detailViewController = CarteDetailViewController()
+        detailViewController.carteItem = self.items[indexPath.row]
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
+}
+
+
+public class CarteDetailViewController: UIViewController {
+
+    public var textView: UITextView = {
+        let textView = UITextView()
+        textView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        textView.editable = false
+        textView.dataDetectorTypes = .Link
+        return textView
+    }()
+    public var carteItem: CarteItem? {
+        didSet {
+            self.title = carteItem?.displayName
+            self.textView.text = carteItem?.licenseText
+        }
+    }
+
+    public convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+
+    public override func viewDidLoad() {
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.textView.frame = self.view.bounds
+        self.view.addSubview(self.textView)
     }
 
 }

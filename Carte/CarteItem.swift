@@ -15,6 +15,13 @@ import Foundation
     public var licenseName: String?
     public var licenseText: String?
 
+    public var displayName: String? {
+        if let name = self.name, version = self.version {
+            return "\(name) (\(version))"
+        }
+        return self.name
+    }
+
     public init() {
 
     }
