@@ -31,6 +31,7 @@ public class CarteViewController: UITableViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
         self.title = NSLocalizedString("OSS Notice", comment: "OSS Notice")
+        self.loadCartesFromInfoDictionary()
     }
 
     public convenience init() {
@@ -47,6 +48,20 @@ public class CarteViewController: UITableViewController {
                 target: self,
                 action: "doneButtonDidTap"
             )
+        }
+    }
+
+    public func loadCartesFromInfoDictionary() {
+        if let carteDicts = NSBundle.mainBundle().infoDictionary?["Carte"] as? [[String: AnyObject]] {
+            for dict in carteDicts {
+                let item = CarteItem()
+                item.name = dict["name"] as? String
+                if let base64EncodedText = dict["text"] as? String,
+                   let data = NSData(base64EncodedString: base64EncodedText, options: .allZeros) {
+                    item.licenseText = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
+                }
+                self.items.append(item)
+            }
         }
     }
 
