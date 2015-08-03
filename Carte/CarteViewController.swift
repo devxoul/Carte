@@ -41,6 +41,19 @@ public class CarteViewController: UITableViewController {
         self.init()
     }
 
+    public override func viewWillAppear(animated: Bool) {
+        if self.presentingViewController != nil && self.navigationItem.leftBarButtonItem == nil {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done,
+                target: self,
+                action: "doneButtonDidTap"
+            )
+        }
+    }
+
+    internal func doneButtonDidTap() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
 }
 
 
