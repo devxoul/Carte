@@ -135,7 +135,7 @@ public class CarteDetailViewController: UIViewController {
     public var textView: UITextView = {
         let textView = UITextView()
         textView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-        textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         textView.editable = false
         textView.dataDetectorTypes = .Link
         return textView
