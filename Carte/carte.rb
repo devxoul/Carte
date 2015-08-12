@@ -25,7 +25,7 @@ class Generator
 
   def cocoapods
     files = []
-    filenames = `find .. -name "LICENSE*"`.split("\n")
+    filenames = `find $SRCROOT/Pods -name "LICENSE*"`.split("\n")
     filenames.each do |filename|
       begin
         name = filename.split("/Pods/")[1].split("/")[0]
