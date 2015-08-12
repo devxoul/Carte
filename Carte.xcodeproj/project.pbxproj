@@ -225,7 +225,9 @@
 			buildPhases = (
 				038736891B6FC22200D81EDD /* Sources */,
 				0387368A1B6FC22200D81EDD /* Frameworks */,
+				031AAB311B7BB3B200B4B72C /* Carte Pre */,
 				0387368B1B6FC22200D81EDD /* Resources */,
+				031AAB321B7BB3BF00B4B72C /* Carte Post */,
 				031AAB301B7BB2C000B4B72C /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -303,6 +305,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		031AAB311B7BB3B200B4B72C /* Carte Pre */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Carte Pre";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby $SRCROOT/Carte/carte.rb pre";
+		};
+		031AAB321B7BB3BF00B4B72C /* Carte Post */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Carte Post";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby $SRCROOT/Carte/carte.rb post";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		038736641B6FBCAE00D81EDD /* Sources */ = {
