@@ -6,6 +6,14 @@ Carte
 Open source notice generator for Cocoa.
 
 
+Screenshot
+----------
+
+*These are the screenshots of demo project which are located in CarteDemo directory.*
+
+![carte](https://cloud.githubusercontent.com/assets/931655/9231520/8c0d4216-4163-11e5-86c0-610028ea92b8.png)
+
+
 Features
 --------
 
@@ -124,14 +132,6 @@ carteViewController.configureDetailViewController = { detailViewController in
     println(detailViewController.carteItem!.name)
 }
 ```
-
-
-Screenshot
-----------
-
-You can find a demo project in CarteDemo directory. These are the screenshots of demo project.
-
-![carte](https://cloud.githubusercontent.com/assets/931655/9231520/8c0d4216-4163-11e5-86c0-610028ea92b8.png)
 
 
 License
