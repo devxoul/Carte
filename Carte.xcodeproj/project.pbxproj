@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031AAB2F1B7BB2C000B4B72C /* Carte.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038736691B6FBCAE00D81EDD /* Carte.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0387366F1B6FBCAE00D81EDD /* Carte.h in Headers */ = {isa = PBXBuildFile; fileRef = 0387366E1B6FBCAE00D81EDD /* Carte.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		038736751B6FBCAE00D81EDD /* Carte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038736691B6FBCAE00D81EDD /* Carte.framework */; };
 		0387367C1B6FBCAE00D81EDD /* CarteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0387367B1B6FBCAE00D81EDD /* CarteTests.swift */; };
@@ -16,7 +17,6 @@
 		038736941B6FC22200D81EDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038736931B6FC22200D81EDD /* ViewController.swift */; };
 		038736991B6FC22200D81EDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 038736981B6FC22200D81EDD /* Images.xcassets */; };
 		0387369C1B6FC22200D81EDD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0387369A1B6FC22200D81EDD /* LaunchScreen.xib */; };
-		038736B21B6FC35D00D81EDD /* Carte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038736691B6FBCAE00D81EDD /* Carte.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +35,20 @@
 			remoteInfo = Carte;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		031AAB301B7BB2C000B4B72C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				031AAB2F1B7BB2C000B4B72C /* Carte.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		038736691B6FBCAE00D81EDD /* Carte.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Carte.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				038736B21B6FC35D00D81EDD /* Carte.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +226,7 @@
 				038736891B6FC22200D81EDD /* Sources */,
 				0387368A1B6FC22200D81EDD /* Frameworks */,
 				0387368B1B6FC22200D81EDD /* Resources */,
+				031AAB301B7BB2C000B4B72C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -443,7 +457,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Carte/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -461,7 +475,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Carte/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -543,6 +557,7 @@
 				038736811B6FBCAE00D81EDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		038736821B6FBCAE00D81EDD /* Build configuration list for PBXNativeTarget "CarteTests" */ = {
 			isa = XCConfigurationList;
@@ -551,6 +566,7 @@
 				038736841B6FBCAE00D81EDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		038736A91B6FC22200D81EDD /* Build configuration list for PBXNativeTarget "CarteDemo" */ = {
 			isa = XCConfigurationList;
@@ -559,6 +575,7 @@
 				038736AB1B6FC22200D81EDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
