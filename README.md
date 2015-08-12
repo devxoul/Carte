@@ -84,6 +84,46 @@ let carteViewController = CarteViewController()
 ```
 
 
+Customizing
+-----------
+
+### Manipulating items
+
+`CarteViewController` has a property named `items` which is an array of `CarteItem`. All of licenses are stored in `items`. You can add new items, remove existings, or sort items by manipulating `items` array.
+
+This is an example of adding a new `CarteItem` and sorting items.
+
+```swift
+let item = CarteItem()
+item.name = "Carte"
+item.licenseText = "The MIT License (MIT) ...Very long text..."
+
+let carteViewController = CarteViewController()
+carteViewController.items.append(item)
+carteViewController.items.sort { $0.name < $1.name }
+```
+
+### Customizing View Controllers
+
+`CarteDetailViewController` is appeared when select a cell of table view. `CarteViewController` provides a handler for customizing it.
+
+Definition: 
+
+```swift
+var configureDetailViewController: (CarteDetailViewController -> Void)?
+```
+
+Example:
+
+```swift
+let carteViewController = CarteViewController()
+carteViewController.configureDetailViewController = { detailViewController in
+    detailViewController.navigationItem.leftBarButtonItem = ...
+    println(detailViewController.carteItem!.name)
+}
+```
+
+
 Screenshot
 ----------
 
