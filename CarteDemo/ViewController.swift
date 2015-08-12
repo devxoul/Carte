@@ -23,15 +23,7 @@ public class ViewController: UIViewController {
     }
 
     public func settingsDidTap() {
-        let item = CarteItem()
-        item.name = "Carte"
-        item.version = "1.0.0"
-        item.licenseName = "MIT"
-        item.licenseText = "Hello, World!"
-
         let carteViewController = CarteViewController()
-        carteViewController.items.append(item)
-
         let navigationController = UINavigationController(rootViewController: carteViewController)
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
