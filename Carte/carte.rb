@@ -21,6 +21,7 @@ class Generator
 
   def generate
     self.cocoapods
+    self.cocoaseeds
   end
 
   def cocoapods
@@ -29,6 +30,19 @@ class Generator
     filenames.each do |filename|
       begin
         name = filename.split("/Pods/")[1].split("/")[0]
+        self.cartes[name] = Base64.strict_encode64(File.read(filename))
+      rescue
+      end
+    end
+  end
+
+  def cocoaseeds
+    files = []
+    filenames = `find $SRCROOT/Seeds -name "LICENSE*"`.split("\n")
+    filenames.each do |filename|
+      begin
+        name = filename.split("/Seeds/")[1].split("/")[0]
+        puts "Carte: #{name}"
         self.cartes[name] = Base64.strict_encode64(File.read(filename))
       rescue
       end
