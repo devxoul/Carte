@@ -3,7 +3,7 @@ Carte
 
 [![CocoaPods](http://img.shields.io/cocoapods/v/Carte.svg?style=flat)](https://cocoapods.org/pods/Carte)
 
-Open source notice generator for Cocoa.
+Open source license notice view generator for Cocoa.
 
 
 Screenshot
