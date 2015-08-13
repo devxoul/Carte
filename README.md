@@ -9,7 +9,8 @@ Open source license notice view generator for Cocoa.
 Screenshot
 ----------
 
-![carte](https://cloud.githubusercontent.com/assets/931655/9231520/8c0d4216-4163-11e5-86c0-610028ea92b8.png)
+![carte](https://cloud.githubusercontent.com/assets/931655/9243550/d781a822-41cc-11e5-91bb-8b5123b2c91e.png)
+
 
 > These are the screenshots of demo project which is located in [CarteDemo](https://github.com/devxoul/Carte/tree/master/CarteDemo) directory.
 

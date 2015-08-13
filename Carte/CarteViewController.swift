@@ -32,7 +32,7 @@ public class CarteViewController: UITableViewController {
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
-        self.title = NSLocalizedString("OSS Notice", comment: "OSS Notice")
+        self.title = NSLocalizedString("Open Source Licenses", comment: "Open Source Licenses")
         self.loadCartesFromInfoDictionary()
     }
 
