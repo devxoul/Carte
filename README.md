@@ -38,7 +38,7 @@ Getting Started
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/Carte', '0.1.0', :files => 'Carte/*.{swift,rb}'
+    github 'devxoul/Carte', '0.1.1', :files => 'Carte/*.{swift,rb}'
     ```
 
 
