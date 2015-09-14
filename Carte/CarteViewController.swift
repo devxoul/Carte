@@ -40,7 +40,7 @@ public class CarteViewController: UITableViewController {
         self.init(nibName: nil, bundle: nil)
     }
 
-    public required convenience init(coder aDecoder: NSCoder!) {
+    public required convenience init(coder aDecoder: NSCoder) {
         self.init()
     }
 
@@ -59,7 +59,7 @@ public class CarteViewController: UITableViewController {
                 let item = CarteItem()
                 item.name = dict["name"] as? String
                 if let base64EncodedText = dict["text"] as? String,
-                   let data = NSData(base64EncodedString: base64EncodedText, options: .allZeros) {
+                   let data = NSData(base64EncodedString: base64EncodedText, options: []) {
                     item.licenseText = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
                 }
                 self.items.append(item)
@@ -68,7 +68,7 @@ public class CarteViewController: UITableViewController {
         if self.items.filter({ $0.name == "Carte" }).count == 0 {
             let item = CarteItem()
             item.name = "Carte"
-            item.licenseText = "\n".join([
+            item.licenseText = [
                 "The MIT License (MIT)",
                 "",
                 "Copyright (c) 2015 Suyeol Jeon (xoul.kr)",
@@ -89,9 +89,9 @@ public class CarteViewController: UITableViewController {
                 "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,",
                 "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE",
                 "SOFTWARE.",
-            ])
+            ].joinWithSeparator("\n")
             self.items.append(item)
-            self.items.sort { $0.name < $1.name }
+            self.items.sortInPlace { $0.name < $1.name }
         }
     }
 
@@ -110,7 +110,7 @@ extension CarteViewController {
 
     public override func tableView(tableView: UITableView,
                                    cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as? UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
             ?? UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         let item = self.items[indexPath.row]
         cell.textLabel?.text = item.displayName
@@ -134,7 +134,7 @@ public class CarteDetailViewController: UIViewController {
 
     public var textView: UITextView = {
         let textView = UITextView()
-        textView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        textView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         textView.editable = false
         textView.dataDetectorTypes = .Link

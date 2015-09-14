@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class CarteItem {
+@objc public class CarteItem: NSObject {
 
     public var name: String?
     public var version: String?
@@ -20,10 +20,6 @@ import Foundation
             return "\(name) (\(version))"
         }
         return self.name
-    }
-
-    public init() {
-
     }
 
 }
