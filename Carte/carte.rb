@@ -42,7 +42,6 @@ class Generator
     filenames.each do |filename|
       begin
         name = filename.split("/Seeds/")[1].split("/")[0]
-        puts "Carte: #{name}"
         self.cartes[name] = Base64.strict_encode64(File.read(filename))
       rescue
       end
