@@ -26,7 +26,7 @@ class Generator
 
   def cocoapods
     files = []
-    filenames = `find $SRCROOT/Pods -name "LICENSE*"`.split("\n")
+    filenames = `find $SRCROOT/Pods -name "LICENSE*" 2>/dev/null`.split("\n")
     filenames.each do |filename|
       begin
         name = filename.split("/Pods/")[1].split("/")[0]
@@ -38,7 +38,7 @@ class Generator
 
   def cocoaseeds
     files = []
-    filenames = `find $SRCROOT/Seeds -name "LICENSE*"`.split("\n")
+    filenames = `find $SRCROOT/Seeds -name "LICENSE*" 2>/dev/null`.split("\n")
     filenames.each do |filename|
       begin
         name = filename.split("/Seeds/")[1].split("/")[0]
@@ -55,7 +55,9 @@ end
 
 
 def delete
-  `/usr/libexec/PlistBuddy -c "Delete :Carte" $SRCROOT/$INFOPLIST_FILE || true`
+  `/usr/libexec/PlistBuddy\
+    -c "Delete :Carte"\
+    $SRCROOT/$INFOPLIST_FILE 2>/dev/null || true`
 end
 
 
