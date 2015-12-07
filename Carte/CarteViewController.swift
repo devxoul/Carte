@@ -154,6 +154,7 @@ public class CarteDetailViewController: UIViewController {
     public override func viewDidLoad() {
         self.view.backgroundColor = UIColor.whiteColor()
         self.textView.frame = self.view.bounds
+        self.textView.contentOffset = CGPoint(x: 0, y: 0)
         self.view.addSubview(self.textView)
     }
 
