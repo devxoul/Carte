@@ -1,7 +1,7 @@
 Carte
 =====
 
-![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg)
+![Swift 2.1](https://img.shields.io/badge/Swift-2.1-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/Carte.svg?style=flat)](https://cocoapods.org/pods/Carte)
 
 Open source license notice view generator for Cocoa.
