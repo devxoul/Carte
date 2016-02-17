@@ -45,6 +45,8 @@ public class CarteViewController: UITableViewController {
     }
 
     public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         if self.presentingViewController != nil && self.navigationItem.leftBarButtonItem == nil {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done,
                 target: self,
