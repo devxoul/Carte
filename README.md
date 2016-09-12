@@ -1,7 +1,7 @@
 Carte
 =====
 
-![Swift 2.1](https://img.shields.io/badge/Swift-2.1-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/Carte.svg?style=flat)](https://cocoapods.org/pods/Carte)
 
 Open source license notice view generator for Cocoa.
@@ -117,7 +117,7 @@ Example:
 let carteViewController = CarteViewController()
 carteViewController.configureDetailViewController = { detailViewController in
     detailViewController.navigationItem.leftBarButtonItem = ...
-    println(detailViewController.carteItem!.name)
+    print(detailViewController.carteItem!.name)
 }
 ```
 
