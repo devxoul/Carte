@@ -8,18 +8,22 @@
 
 import Foundation
 
-@objc public class CarteItem: NSObject {
+public struct CarteItem {
 
-    public var name: String?
-    public var version: String?
-    public var licenseName: String?
-    public var licenseText: String?
+  public var name: String
+  public var version: String?
+  public var licenseName: String?
+  public var licenseText: String?
 
-    public var displayName: String? {
-        if let name = self.name, version = self.version {
-            return "\(name) (\(version))"
-        }
-        return self.name
+  public var displayName: String? {
+    if let version = self.version {
+      return "\(self.name) (\(version))"
     }
+    return self.name
+  }
 
+  init(name: String) {
+    self.name = name
+  }
+  
 }
