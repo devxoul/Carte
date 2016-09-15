@@ -9,17 +9,19 @@
 import UIKit
 
 @UIApplicationMain
-public class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    public var window: UIWindow?
+  var window: UIWindow?
 
-    public func application(application: UIApplication,
-                            didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window!.backgroundColor = UIColor.whiteColor()
-        self.window!.rootViewController = UINavigationController(rootViewController: ViewController())
-        self.window!.makeKeyAndVisible()
-        return true
-    }
-
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+  ) -> Bool {
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+    self.window!.backgroundColor = UIColor.white
+    self.window!.rootViewController = UINavigationController(rootViewController: ViewController())
+    self.window!.makeKeyAndVisible()
+    return true
+  }
+  
 }

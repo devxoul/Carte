@@ -9,23 +9,23 @@
 import Carte
 import UIKit
 
-public class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Carte Demo"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "\u{2699}",
-            style: .Plain,
-            target: self,
-            action: "settingsDidTap"
-        )
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.title = "Carte Demo"
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      title: "\u{2699}",
+      style: .plain,
+      target: self,
+      action: #selector(settingsDidTap)
+    )
+  }
 
-    public func settingsDidTap() {
-        let carteViewController = CarteViewController()
-        let navigationController = UINavigationController(rootViewController: carteViewController)
-        self.presentViewController(navigationController, animated: true, completion: nil)
-    }
+  func settingsDidTap() {
+    let carteViewController = CarteViewController()
+    let navigationController = UINavigationController(rootViewController: carteViewController)
+    self.present(navigationController, animated: true)
+  }
 
 }
