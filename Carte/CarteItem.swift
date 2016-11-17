@@ -22,7 +22,7 @@ public struct CarteItem {
     return self.name
   }
 
-  init(name: String) {
+  public init(name: String) {
     self.name = name
   }
   
