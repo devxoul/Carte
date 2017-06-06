@@ -1,0 +1,7 @@
+ignore:
+  - "Tests/"
+
+coverage:
+  status:
+    project: off
+    patch: off
