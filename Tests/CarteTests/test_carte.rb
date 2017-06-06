@@ -82,7 +82,7 @@ class Test < Minitest::Test
   end
 
   def test_generator_generate
-    srcroot = "./"
+    srcroot = fixture_dir("CarteFixtureApp")
     info = fixture_dir("CarteFixtureApp", "CarteFixtureApp/Info.plist")
     generator = InfoPlistGenerator.new(srcroot, info)
     generator.generate()
@@ -97,7 +97,7 @@ class Test < Minitest::Test
   end
 
   def test_generator_cleanup
-    srcroot = "./"
+    srcroot = fixture_dir("CarteFixtureApp")
     info = fixture_dir("CarteFixtureApp", "CarteFixtureApp/Info.plist")
     generator = InfoPlistGenerator.new(srcroot, info)
     generator.generate()
