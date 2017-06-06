@@ -1,93 +1,62 @@
-Carte
-=====
+# Carte
 
 ![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/Carte.svg?style=flat)](https://cocoapods.org/pods/Carte)
 
-Open source license notice view generator for Cocoa.
+An open source license notice view generator for Swift.
 
-
-Screenshot
-----------
+## Screenshot
 
 ![carte](https://cloud.githubusercontent.com/assets/931655/9243550/d781a822-41cc-11e5-91bb-8b5123b2c91e.png)
 
+> ⬆ Those view controllers are automatically generated ✨
 
-> These are the screenshots of demo project which is located in [CarteDemo](https://github.com/devxoul/Carte/tree/master/CarteDemo) directory.
+## Features
 
-
-Features
---------
-
-- **:red_car: Automatic:** Carte automatically generates OSS notice from [CocoaPods](https://cocoapods.org) and [CocoaSeeds](https://github.com/devxoul/CoocaSeeds).
-- **:coffee: Easy Integration:** Install Carte, add run scripts, then push CarteViewController. It's done.
-- **:sparkles: Customizable:** Adding custom items, customizing CarteViewController. See [Customizing](#customizing) section.
+- **🚗 Automatic:** Carte automatically generates OSS notice from [CocoaPods](https://cocoapods.org).
+- **☕️ Easy Integration:** Install Carte and push CarteViewController. It's all done.
+- **🎨 Customizable:** Adding custom items, customizing CarteViewController. See [Customizing](#customizing) section.
 
 
-Getting Started
----------------
+## Installation
 
-### Step 1. Installation
+Carte only supports [CocoaPods](https://cocoapods.org) at this time.
 
-- **For iOS 8+ projects:** Use [CocoaPods](https://cocoapods.org) with Podfile:
+```ruby
+pod 'Carte'
+```
 
-    ```ruby
-    pod 'Carte', '~> 1.0'
-    ```
+**⚠️ IMPORTANT**: Don't forget to add the post install hook to your Podfile. Add this script to the end of your Podfile:
 
+```ruby
+post_install do |installer|
+  pods_dir = File.dirname(installer.pods_project.path)
+  script = File.join(pods_dir, "Carte", "Sources", "Carte", "carte.rb")
+  at_exit { system "ruby #{script} configure" }
+end
+```
 
-- **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
+## Usage
 
-    ```ruby
-    github 'devxoul/Carte', '1.0.2', :files => 'Carte/*.{swift,rb}'
-    ```
-
-
-### Step 2. Adding Run Scripts
-
-<img src="https://cloud.githubusercontent.com/assets/931655/9232206/6cd6cec2-4167-11e5-8bcd-9d911cf59a50.png" alt="phase-order" align="right" hspace="20">
-
-Carte has a simple ruby script named *carte.rb* that reads third-party libraries from CocoaPods and CocoaSeeds directory. You have to add 2 run script phases **before and after 'Copy Bundle Resources' phase**.
-
-- **Carte Pre**
-
-    <pre>
-    ruby <i>/path/to/carte.rb</i> <b>pre</b>
-    </pre>
-
-- **Carte Post**
-
-    <pre>
-    ruby <i>/path/to/carte.rb</i> <b>post</b>
-    </pre>
-
-- **/path/to/carte.rb:** carte.rb file is located in Carte directory.
-
-    If you installed Carte via:
-
-    - CocoaPods, then path would be: `${SRCROOT}/Pods/Carte/Carte/carte.rb`
-    - CocoaSeeds, then path would be: `${SRCROOT}/Seeds/Carte/Carte/carte.rb`
-
-- **For example (CocoaPods)**:
-
-    ![carte-pre](https://cloud.githubusercontent.com/assets/931655/9234048/71a32392-4171-11e5-8aea-dfdf434b24f0.png)
-
-
-### Step 3. Using CarteViewController
-
-Almost done! What you need to do now is using `CarteViewController`. Use it just like using a `UIViewController`: push, present, or whatever you want to do.
+Carte provides `CarteViewController`. You can use it as a normal view controller. Push, present or do whatever you want.
 
 ```swift
 let carteViewController = CarteViewController()
 ```
 
+If you want to create your own UI, use `Carte.items` to get `CarteItem`s.
 
-Customizing
------------
+```swift
+class Carte {
+  static var items: [CarteItem]
+}
+```
+
+## Customizing
 
 ### Manipulating items
 
-`CarteViewController` has a property named `items` which is an array of `CarteItem`. All of licenses are stored in `items`. You can add new items, remove existings, or sort items by manipulating `items` array.
+`CarteViewController` has a property named `items` which is an array of `CarteItem`. All of the licenses are stored in the `items`. You can add new items, remove existings, or sort items by manipulating `items` array.
 
 This is an example of adding a new `CarteItem` and sorting items.
 
@@ -103,7 +72,7 @@ carteViewController.items.sort { $0.name < $1.name }
 
 ### Customizing View Controllers
 
-`CarteDetailViewController` is appeared when select a cell of table view. `CarteViewController` provides a handler for customizing it.
+`CarteDetailViewController` is presented when user selects a table view cell. `CarteViewController` provides a handler for customizing it.
 
 Definition: 
 
@@ -116,13 +85,11 @@ Example:
 ```swift
 let carteViewController = CarteViewController()
 carteViewController.configureDetailViewController = { detailViewController in
-    detailViewController.navigationItem.leftBarButtonItem = ...
-    print(detailViewController.carteItem!.name)
+  detailViewController.navigationItem.leftBarButtonItem = ...
+  print(detailViewController.carteItem.name)
 }
 ```
 
+## License
 
-License
--------
-
-Carte is under MIT license. See the LICENSE file for more info.
+Carte is under MIT license. See the [LICENSE](LICENSE) file for more info.
