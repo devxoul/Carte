@@ -19,14 +19,14 @@ class ProjectIntegrator
       resources_phase_index = target.build_phases.find_index { |p|
         p.kind_of?(PBXResourcesBuildPhase)
       } or next
-      pre_script_phase = project.new(PBXShellScriptBuildPhase).tap do |p|
-        p.name = "[Carte] Pre Script"
-        p.shell_script = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre"
-      end
-      post_script_phase = project.new(PBXShellScriptBuildPhase).tap do |p|
-        p.name = "[Carte] Post Script"
-        p.shell_script = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post"
-      end
+      pre_script_phase = new_script_phase(
+        "[Carte] Pre Script",
+        "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre"
+      )
+      post_script_phase = new_script_phase(
+        "[Carte] Post Script",
+        "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post",
+      )
       target.build_phases.insert(resources_phase_index + 1, post_script_phase)
       target.build_phases.insert(resources_phase_index, pre_script_phase)
     end
@@ -42,6 +42,19 @@ class ProjectIntegrator
         index = target.build_phases.index(p)
         target.build_phases.delete_at(index)
       }
+  end
+
+  def new_script_phase(name, shell_script)
+    uuid = self.class.uuid_with_name(name)
+    phase = PBXShellScriptBuildPhase.new(project, uuid)
+    phase.initialize_defaults
+    phase.name = name
+    phase.shell_script = shell_script
+    return phase
+  end
+
+  def self.uuid_with_name(name)
+      Digest::MD5.hexdigest(name).upcase[0,24]
   end
 end
 

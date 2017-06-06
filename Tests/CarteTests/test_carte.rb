@@ -71,8 +71,12 @@ class Test < Minitest::Test
     assert_equal target.build_phases[2].name, "[Carte] Pre Script"
     assert_equal target.build_phases[2].shell_script, \
       "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre"
+    assert_equal target.build_phases[2].uuid, \
+      ProjectIntegrator.uuid_with_name(target.build_phases[2].name)
     assert target.build_phases[3].kind_of? PBXResourcesBuildPhase
     assert_equal target.build_phases[4].name, "[Carte] Post Script"
+    assert_equal target.build_phases[4].uuid, \
+      ProjectIntegrator.uuid_with_name(target.build_phases[4].name)
     assert_equal target.build_phases[4].shell_script, \
       "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post"
   end
