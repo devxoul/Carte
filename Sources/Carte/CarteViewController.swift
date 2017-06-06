@@ -78,6 +78,8 @@ extension CarteViewController {
 
 
 open class CarteDetailViewController: UIViewController {
+  open let carteItem: CarteItem
+
   open var textView: UITextView = {
     let textView = UITextView()
     textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -87,10 +89,15 @@ open class CarteDetailViewController: UIViewController {
     return textView
   }()
 
-  public convenience init(item: CarteItem) {
-    self.init(nibName: nil, bundle: nil)
+  public init(item: CarteItem) {
+    self.carteItem = item
+    super.init(nibName: nil, bundle: nil)
     self.title = item.displayName
     self.textView.text = item.licenseText
+  }
+  
+  public required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   open override func viewDidLoad() {
