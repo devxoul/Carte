@@ -31,8 +31,7 @@ pod 'Carte'
 ```ruby
 post_install do |installer|
   pods_dir = File.dirname(installer.pods_project.path)
-  script = File.join(pods_dir, "Carte", "Sources", "Carte", "carte.rb")
-  at_exit { system "ruby #{script} configure" }
+  at_exit { "ruby #{pods_dir}/Carte/Sources/Carte/carte.rb configure" }
 end
 ```
 
