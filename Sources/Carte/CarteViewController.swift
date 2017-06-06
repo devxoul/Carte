@@ -85,6 +85,7 @@ open class CarteDetailViewController: UIViewController {
     textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     textView.font = UIFont.preferredFont(forTextStyle: .footnote)
     textView.isEditable = false
+    textView.alwaysBounceVertical = true
     textView.dataDetectorTypes = .link
     return textView
   }()
