@@ -30,7 +30,7 @@ open class CarteViewController: UITableViewController {
   override open func viewDidLoad() {
     super.viewDidLoad()
     self.title = NSLocalizedString("Open Source Licenses", comment: "Open Source Licenses")
-    self.tableView.register(UITableView.self, forCellReuseIdentifier: "cell")
+    self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
   }
 
   open override func viewWillAppear(_ animated: Bool) {
