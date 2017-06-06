@@ -38,6 +38,7 @@ public class Carte {
   }
 
   static func appendingCarte(to items: [CarteItem]) -> [CarteItem] {
+    guard items.lazy.filter({ $0.name == "Carte" }).first == nil else { return items }
     var item = CarteItem(name: "Carte")
     item.licenseText = [
       "The MIT License (MIT)",
