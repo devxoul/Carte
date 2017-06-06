@@ -53,15 +53,14 @@ class Carte {
 
 ## Customizing
 
-### Manipulating items
+### Custom Items
 
 `CarteViewController` has a property named `items` which is an array of `CarteItem`. All of the licenses are stored in the `items`. You can add new items, remove existings, or sort items by manipulating `items` array.
 
 This is an example of adding a new `CarteItem` and sorting items.
 
 ```swift
-let item = CarteItem()
-item.name = "Carte"
+var item = CarteItem(name: "Carte")
 item.licenseText = "The MIT License (MIT) ...Very long text..."
 
 let carteViewController = CarteViewController()
