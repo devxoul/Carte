@@ -1,86 +1,134 @@
 # encoding: utf-8
 
-require 'base64'
+require "base64"
+require "xcodeproj"
 
+include Xcodeproj::Project::Object
 
-def help
-  puts "Usage: ruby carte.rb {pre|post}"
-  exit 1
+class ProjectIntegrator
+  attr_accessor :project
+
+  def initialize(project)
+    self.project = project
+  end
+
+  def integrate
+    self.project.targets.each do |target|
+      next unless target.kind_of?(PBXNativeTarget)
+      remove_existing_scripts(target)
+      resources_phase_index = target.build_phases.find_index { |p|
+        p.kind_of?(PBXResourcesBuildPhase)
+      } or next
+      pre_script_phase = project.new(PBXShellScriptBuildPhase).tap do |p|
+        p.name = "[Carte] Pre Script"
+        p.shell_script = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre"
+      end
+      post_script_phase = project.new(PBXShellScriptBuildPhase).tap do |p|
+        p.name = "[Carte] Post Script"
+        p.shell_script = "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post"
+      end
+      target.build_phases.insert(resources_phase_index + 1, post_script_phase)
+      target.build_phases.insert(resources_phase_index, pre_script_phase)
+    end
+    self.project.save
+  end
+
+  def remove_existing_scripts(target)
+    target.build_phases
+      .select { |p|
+        p.kind_of? PBXShellScriptBuildPhase and p.name.include?("Carte")
+      }
+      .each { |p|
+        index = target.build_phases.index(p)
+        target.build_phases.delete_at(index)
+      }
+  end
 end
 
-
-class Generator
+class InfoPlistGenerator
+  attr_accessor :srcroot
+  attr_accessor :infoplist_file
 
   # @return [Hash{Sting => String}] license text by library name
   #
-  attr_accessor :cartes
+  attr_accessor :items
 
-  def initialize
-    self.cartes = {}
+  def initialize(srcroot, infoplist_file)
+    self.srcroot = srcroot
+    self.infoplist_file = infoplist_file
+    self.items = {}
   end
 
   def generate
-    self.cocoapods
-    self.cocoaseeds
+    self.plistbuddy("Delete :Carte")
+    self.plistbuddy("Add :Carte array")
+    self.add_items_from_cocoapods
+    self.items.sort.each_with_index do |(name, text), index|
+      plistbuddy "Add :Carte:#{index}:name string #{name}"
+      plistbuddy "Add :Carte:#{index}:text string #{text}"
+    end
   end
 
-  def cocoapods
-    files = []
-    filenames = `find "$SRCROOT/Pods" -name "LICENSE*" 2>/dev/null`.split("\n")
-    filenames.each do |filename|
+  def cleanup
+    self.plistbuddy("Delete :Carte")
+  end
+
+  def plistbuddy(command)
+    `/usr/libexec/PlistBuddy -c "#{command}" "#{self.infoplist_file}" \
+     2>/dev/null || true`
+  end
+
+  def add_items_from_cocoapods
+    license_files_from("#{srcroot}/Pods").each do |filename|
       begin
         name = filename.split("/Pods/")[1].split("/")[0]
-        self.cartes[name] = Base64.strict_encode64(File.read(filename))
+        self.items[name] = Base64.strict_encode64(File.read(filename))
       rescue
       end
     end
+    return items
   end
 
-  def cocoaseeds
-    files = []
-    filenames = `find "$SRCROOT/Seeds" -name "LICENSE*" 2>/dev/null`.split("\n")
-    filenames.each do |filename|
-      begin
-        name = filename.split("/Seeds/")[1].split("/")[0]
-        self.cartes[name] = Base64.strict_encode64(File.read(filename))
-      rescue
-      end
-    end
+  def license_files_from(path)
+    return `find "#{path}" -iname "LICENSE*" 2>/dev/null`.split("\n")
   end
-
-  # TODO: cocoaseeds, carthage, manually added libraries...
-
 end
 
-
-def delete
-  `/usr/libexec/PlistBuddy\
-    -c "Delete :Carte"\
-    "$INFOPLIST_FILE" 2>/dev/null || true`
+def find_xcodeproj(path)
+  candidates = `ls "#{path}" | grep .xcodeproj`.strip.split("/")
+  return [path, candidates.first].join("/")
 end
 
+def run(command)
+  case command
+  when "configure"
+    # prepare_command's working directory is Pods/
+    root_path = File.expand_path("../../../../../", __FILE__)
+    project_path = find_xcodeproj(root_path)
+    project = Xcodeproj::Project.open(project_path)
+    integrator = ProjectIntegrator.new(project)
+    integrator.integrate()
 
-case ARGV[0]
-when "pre"
-  delete
-  `/usr/libexec/PlistBuddy\
-    -c "Add :Carte array"\
-    "$INFOPLIST_FILE" || true`
+  when "pre"
+    generator = InfoPlistGenerator.new(ENV["SRCROOT"], ENV["INFOPLIST_FILE"])
+    generator.generate()
 
-  generator = Generator.new
-  generator.generate
-  generator.cartes.sort.each_with_index do |(name, text), index|
-    `/usr/libexec/PlistBuddy\
-      -c "Add :Carte:#{index}:name string #{name}"\
-      "$INFOPLIST_FILE" || true`
-    `/usr/libexec/PlistBuddy\
-      -c "Add :Carte:#{index}:text string #{text}"\
-      "$INFOPLIST_FILE" || true`
+  when "post"
+    generator = InfoPlistGenerator.new(ENV["SRCROOT"], ENV["INFOPLIST_FILE"])
+    generator.cleanup()
+
+  else
+    help
   end
+end
 
-when "post"
-  delete
+def help
+  puts "Usage: ruby carte.rb configure PROJECT_ROOT_PATH\n" \
+       "       ruby carte.rb pre\n" \
+       "       ruby carte.rb post"
+  exit 1
+end
 
-else
-  help
+if __FILE__ == $0
+  run(ARGV[0])
 end
