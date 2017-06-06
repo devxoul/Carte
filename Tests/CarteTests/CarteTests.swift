@@ -82,6 +82,19 @@ final class CarteTests: XCTestCase {
     XCTAssertEqual(Carte.items.first?.name, "Carte")
   }
 
+  func testItems_carteAlreadyExists() {
+    Carte.infoDictionary = [
+      "Carte": [
+        ["name": "C"],
+        ["name": "A"],
+        ["name": "B"],
+        ["name": "Carte"],
+      ]
+    ]
+    XCTAssertEqual(Carte.items.count, 4)
+    XCTAssertEqual(Carte.items.map { $0.name }, ["A", "B", "C", "Carte"])
+  }
+
   func testItems() {
     Carte.infoDictionary = [
       "Carte": [
