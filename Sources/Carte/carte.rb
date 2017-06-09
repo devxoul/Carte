@@ -36,7 +36,9 @@ class ProjectIntegrator
   def remove_existing_scripts(target)
     target.build_phases
       .select { |p|
-        p.kind_of? PBXShellScriptBuildPhase and p.name.include?("Carte")
+        p.kind_of? PBXShellScriptBuildPhase and \
+          not p.name.nil? and \
+          p.name.include?("Carte")
       }
       .each { |p|
         index = target.build_phases.index(p)
