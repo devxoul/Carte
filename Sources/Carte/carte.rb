@@ -52,6 +52,7 @@ class ProjectIntegrator
     phase.initialize_defaults
     phase.name = name
     phase.shell_script = shell_script
+    phase.show_env_vars_in_log = '0'
     return phase
   end
 
