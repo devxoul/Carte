@@ -1,6 +1,6 @@
 # Carte
 
-![Swift](https://img.shields.io/badge/Swift-3.1-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/Carte.svg?style=flat)](https://cocoapods.org/pods/Carte)
 [![Build Status](https://travis-ci.org/devxoul/Carte.svg?branch=master)](https://travis-ci.org/devxoul/Carte)
 [![Codecov](https://img.shields.io/codecov/c/github/devxoul/Carte.svg)](https://codecov.io/gh/devxoul/Carte)
