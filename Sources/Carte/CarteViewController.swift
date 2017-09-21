@@ -47,7 +47,7 @@ open class CarteViewController: UITableViewController {
     }
   }
 
-  open dynamic func doneButtonDidTap() {
+  @objc open dynamic func doneButtonDidTap() {
     self.dismiss(animated: true)
   }
 }
