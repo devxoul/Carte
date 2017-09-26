@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Carte"
-  s.version          = "2.1.0"
+  s.version          = "2.1.1"
   s.summary          = "Open source notice generator for Cocoa."
   s.homepage         = "https://github.com/devxoul/Carte"
   s.license          = { :type => "MIT", :file => "LICENSE" }
