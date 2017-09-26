@@ -21,11 +21,11 @@ class ProjectIntegrator
       } or next
       pre_script_phase = new_script_phase(
         "[Carte] Pre Script",
-        "$SHELL -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre\""
+        "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre\""
       )
       post_script_phase = new_script_phase(
         "[Carte] Post Script",
-        "$SHELL -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post\"",
+        "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post\"",
       )
       target.build_phases.insert(resources_phase_index + 1, post_script_phase)
       target.build_phases.insert(resources_phase_index, pre_script_phase)
