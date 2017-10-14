@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/devxoul/Carte.git",
                          :tag => s.version.to_s }
   s.source_files     = "Sources/Carte/*.swift"
-  s.preserve_paths   = "Sources/Carte/carte.rb"
+  s.preserve_paths   = "Sources/Carte/**/*"
   s.requires_arc     = true
 
   s.ios.deployment_target = "8.0"
