@@ -70,7 +70,7 @@ class Test < Minitest::Test
     target = project.targets.find { |t| t.name == "CarteFixtureApp" }
     assert_equal target.build_phases[2].name, "[Carte] Pre Script"
     assert_equal target.build_phases[2].shell_script, \
-      "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre\""
+      "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre"
     assert_equal target.build_phases[2].uuid, \
       ProjectIntegrator.uuid_with_name(target.build_phases[2].name)
     assert target.build_phases[3].kind_of? PBXResourcesBuildPhase
@@ -78,7 +78,7 @@ class Test < Minitest::Test
     assert_equal target.build_phases[4].uuid, \
       ProjectIntegrator.uuid_with_name(target.build_phases[4].name)
     assert_equal target.build_phases[4].shell_script, \
-      "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post\""
+      "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post"
   end
 
   def test_generator_generate
@@ -128,10 +128,10 @@ class Test < Minitest::Test
     assert_equal post_script_phase_index, resources_phase_index + 1
     assert_equal \
       target.build_phases[pre_script_phase_index].shell_script,
-      "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre\""
+      "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre"
     assert_equal \
       target.build_phases[post_script_phase_index].shell_script,
-      "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post\""
+      "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post"
 
     # remove post script to prevent from cleanup Info.plist
     target.build_phases.delete_at(post_script_phase_index)

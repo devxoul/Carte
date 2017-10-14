@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+require_relative "./bundler/setup"
 require "base64"
 require "xcodeproj"
 
@@ -21,11 +22,11 @@ class ProjectIntegrator
       } or next
       pre_script_phase = new_script_phase(
         "[Carte] Pre Script",
-        "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre\""
+        "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb pre"
       )
       post_script_phase = new_script_phase(
         "[Carte] Post Script",
-        "$SHELL -i -c \"ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post\"",
+        "ruby ${PODS_ROOT}/Carte/Sources/Carte/carte.rb post",
       )
       target.build_phases.insert(resources_phase_index + 1, post_script_phase)
       target.build_phases.insert(resources_phase_index, pre_script_phase)
@@ -106,7 +107,8 @@ class InfoPlistGenerator
   end
 
   def license_files_from(path)
-    return `find "#{path}" -iname "LICENSE*" 2>/dev/null`.split("\n")
+    return `find "#{path}" -iname "LICENSE*" -maxdepth 2 2>/dev/null`
+      .split("\n")
   end
 end
 
