@@ -16,8 +16,8 @@ class ProjectIntegrator
   def integrate
     self.project.targets.each do |target|
       next unless target.kind_of?(PBXNativeTarget)
-      next if target.test_target_type?
       remove_existing_scripts(target)
+      next if target.test_target_type?
       resources_phase_index = target.build_phases.find_index { |p|
         p.kind_of?(PBXResourcesBuildPhase)
       } or next
