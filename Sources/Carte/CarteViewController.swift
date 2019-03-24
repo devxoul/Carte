@@ -35,10 +35,14 @@ open class CarteViewController: UITableViewController {
 
   open override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    self.adjustLeftBarButtonItemIfNeeded()
+  }
 
-    if self.navigationController?.viewControllers.count ?? 0 > 1 { // pushed
-      self.navigationItem.leftBarButtonItem = nil
-    } else if self.presentingViewController != nil && self.navigationItem.leftBarButtonItem == nil { // presented
+  private func adjustLeftBarButtonItemIfNeeded() {
+    guard self.navigationItem.leftBarButtonItem == nil else { return }
+
+    let isPresented = (self.presentingViewController != nil)
+    if isPresented {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(
         barButtonSystemItem: .done,
         target: self,
