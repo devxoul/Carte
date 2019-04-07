@@ -82,7 +82,7 @@ extension CarteViewController {
 
 
 open class CarteDetailViewController: UIViewController {
-  open let carteItem: CarteItem
+  public let carteItem: CarteItem
 
   open var textView: UITextView = {
     let textView = UITextView()

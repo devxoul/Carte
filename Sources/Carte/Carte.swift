@@ -26,7 +26,7 @@ public class Carte {
 
   static func items(from infoDictionary: [String: Any]?) -> [CarteItem]? {
     return (infoDictionary?["Carte"] as? [[String: Any]])?
-      .flatMap { dict -> CarteItem? in
+      .compactMap { dict -> CarteItem? in
         guard let name = dict["name"] as? String else { return nil }
         var item = CarteItem(name: name)
         item.licenseText = (dict["text"] as? String)
