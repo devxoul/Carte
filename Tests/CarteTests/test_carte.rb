@@ -142,6 +142,7 @@ class Test < Minitest::Test
     assert system("xcodebuild build " \
                   "-workspace CarteFixtureApp.xcworkspace " \
                   "-scheme CarteFixtureApp " \
+                  "-destination platform='iOS Simulator',name='iPhone XS',OS='12.2' " \
                   "CODE_SIGN_IDENTITY=\"\" " \
                   "CODE_SIGNING_REQUIRED=NO >/dev/null")
 
