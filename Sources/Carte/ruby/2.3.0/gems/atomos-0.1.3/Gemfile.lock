@@ -13,7 +13,7 @@ GEM
       ast (~> 2.3)
     powerpack (0.1.1)
     rainbow (3.0.0)
-    rake (10.5.0)
+    rake (12.3.3)
     rspec (3.7.0)
       rspec-core (~> 3.7.0)
       rspec-expectations (~> 3.7.0)
@@ -43,7 +43,7 @@ PLATFORMS
 DEPENDENCIES
   atomos!
   bundler (~> 1.16)
-  rake (~> 10.0)
+  rake (~> 12.3)
   rspec (~> 3.0)
   rubocop
 
